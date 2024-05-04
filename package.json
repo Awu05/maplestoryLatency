@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && cp ./dis ./docs",
-    "buildwindows": "tsc && vite build && xcopy /h /e /i \".\\dist\" \".\\docs\"",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
