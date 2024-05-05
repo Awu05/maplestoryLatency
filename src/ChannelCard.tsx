@@ -84,7 +84,7 @@ export default function ChannelCard(props: Props) {
             <Card
                 variant="outlined"
                 //@ts-expect-error latency will be a number
-                style={{ border: latency >= 130 ? `3px solid #ffd656` : '' }}
+                style={{ border: latency >= 130 ? `4px solid #f87cf8` : '' }}
             >
                 <CardContent>
                     <div
