@@ -8,7 +8,8 @@ import { useEffect, useState } from 'react';
 
 export interface ChannelObject {
     channel: number,
-    ip: string
+    ip: string,
+    latency: number,
 }
 
 interface Props {
@@ -23,23 +24,43 @@ function ajax(urlString: string, callback: ((this: XMLHttpRequest, ev: ProgressE
     c.send()
 }
 
+function randomNumber(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
 
 function measure(ip: string, start: number, setLatency: (delay: number) => void) {
-    ajax(`${ip}:8585`, function () {
+    const randPort: number = randomNumber(8500, 8700);
+    ajax(`${ip}:${randPort}`, function () {
         const delay: number = Date.now() - start;
         setLatency(Math.trunc(delay));
     });
 }
 
+// function measure(ip: string, start: number, setLatency: (delay: number) => void) {
+//     const randPort: number = randomNumber(8500, 8700);
+//     const fetchRes = fetch(`${ip}:${randPort}`);
+//     fetchRes
+//         .then(() => {
+//             const delay: number = Date.now() - start;
+//             console.log('delay: ', delay)
+//             setLatency(Math.trunc(delay));
+//         })
+//         .catch(() => {
+//             const delay: number = Date.now() - start;
+//             console.log('delay: ', delay)
+//             setLatency(Math.trunc(delay));
+//         })
+// }
+
 function latencyColor(latency: number) {
     if (latency <= 90) {
-        return 'green'
+        return '#00ff83'
     } else if (latency > 90 && latency <= 115) {
-        return 'blue'
+        return '#71c7ec'
     } else if (latency > 115) {
-        return 'red'
+        return '#ff5252'
     } else {
-        return 'white'
+        return '#fffff4'
     }
 }
 
