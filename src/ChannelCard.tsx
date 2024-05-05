@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react';
 export interface ChannelObject {
     channel: number,
     ip: string,
-    latency: number,
 }
 
 interface Props {
@@ -54,12 +53,16 @@ function measure(ip: string, start: number, setLatency: (delay: number) => void)
 
 function latencyColor(latency: number) {
     if (latency <= 90) {
+        //Green
         return '#00ff83'
     } else if (latency > 90 && latency <= 115) {
+        //Blue
         return '#71c7ec'
     } else if (latency > 115) {
-        return '#ff5252'
+        //Red
+        return '#f87c7c'
     } else {
+        //White
         return '#fffff4'
     }
 }
@@ -77,8 +80,12 @@ export default function ChannelCard(props: Props) {
 
 
     return (
-        <Box sx={{ height: 125, width: 200 }}>
-            <Card variant="outlined">
+        <Box sx={{ height: 125, width: 205 }}>
+            <Card
+                variant="outlined"
+                //@ts-expect-error latency will be a number
+                style={{ border: latency >= 130 ? `3px solid #ffd656` : '' }}
+            >
                 <CardContent>
                     <div
                         style={{ display: 'flex' }}

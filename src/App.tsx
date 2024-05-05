@@ -55,7 +55,7 @@ function App() {
   }
 
   return (
-    <div style={{ width: 1250, height: 800, display: 'flex', flexDirection: 'column', justifyContent: 'center', }}>
+    <div style={{ width: 1300, height: 800, display: 'flex', flexDirection: 'column', justifyContent: 'center', }}>
       <Button
         variant="contained"
         onClick={() => {
