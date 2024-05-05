@@ -5,5 +5,7 @@ services:
     build: .
     container_name: maplestory-latency
     restart: always
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - '3005:3005'
