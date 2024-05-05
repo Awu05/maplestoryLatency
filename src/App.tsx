@@ -59,11 +59,7 @@ function App() {
       <Button
         variant="contained"
         onClick={() => {
-          caches.keys().then((names) => {
-            names.forEach((name) => {
-              caches.delete(name);
-            });
-          });
+          window.localStorage.clear();
           window.location.reload();
         }
         }
