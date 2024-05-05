@@ -59,8 +59,14 @@ function App() {
       <Button
         variant="contained"
         onClick={() => {
-          location.reload();
-        }}
+          caches.keys().then((names) => {
+            names.forEach((name) => {
+              caches.delete(name);
+            });
+          });
+          window.location.reload();
+        }
+        }
         style={{ marginBottom: '20px' }}
       >
         Refresh Latency

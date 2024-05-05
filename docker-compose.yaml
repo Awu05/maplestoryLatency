@@ -1,0 +1,9 @@
+version: '3.5'
+services:
+
+  latency:
+    build: .
+    container_name: maplestory-latency
+    restart: always
+    ports:
+      - '3005:3005'
