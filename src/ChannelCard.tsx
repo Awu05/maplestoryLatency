@@ -27,10 +27,11 @@ function randomNumber(min: number, max: number) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
-function measure(ip: string, start: number, setLatency: (delay: number) => void) {
+function measure(ip: string, setLatency: (delay: number) => void) {
     const randPort: number = randomNumber(8500, 8700);
+    const startTime = Date.now();
     ajax(`${ip}:${randPort}`, function () {
-        const delay: number = Date.now() - start;
+        const delay: number = Date.now() - startTime;
         setLatency(Math.trunc(delay));
     });
 }
@@ -69,13 +70,10 @@ function latencyColor(latency: number) {
 
 export default function ChannelCard(props: Props) {
     const { channel } = props
-    const [_, setStart] = useState<number>();
     const [latency, setLatency] = useState<number>();
 
     useEffect(() => {
-        const startTime = Date.now();
-        setStart(startTime)
-        measure(channel.ip, startTime, setLatency);
+        measure(channel.ip, setLatency);
     }, []);
 
 
